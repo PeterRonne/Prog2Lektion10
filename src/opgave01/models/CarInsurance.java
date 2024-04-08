@@ -23,16 +23,22 @@ public class CarInsurance {
      * Throws a RuntimeException, if age < 18, or yearsWithoutDamage < 0,
      * or YearsWithoutDamage > age-18.
      */
+
     public double calculatePremium(int age, boolean isWoman, int yearsWithoutDamage) {
         double premium = basisPremium;
         if (age < 18 || yearsWithoutDamage > age - 18) {
             throw new RuntimeException("Billisten er ikke gammel nok til at køre bil");
         }
+
+        if (yearsWithoutDamage < 0) {
+            throw new RuntimeException("Du kan ikke have negativ erfaring i at køre bil");
+        }
+
         if (age < 25) {
             premium += basisPremium * 0.25;
         }
         if (isWoman) {
-            premium += basisPremium * 0.05;
+            premium -= basisPremium * 0.05;
         }
         if (yearsWithoutDamage > 2 && yearsWithoutDamage < 6) {
             premium -= basisPremium * 0.15;
